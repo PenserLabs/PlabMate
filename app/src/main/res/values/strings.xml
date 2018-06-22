@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PlabMate</string>
+    <string name="question_TV">Question:</string>
 </resources>

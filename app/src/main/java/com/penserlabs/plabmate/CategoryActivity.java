@@ -1,7 +1,10 @@
 package com.penserlabs.plabmate;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,7 +12,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class Category extends AppCompatActivity {
+import java.io.File;
+
+public class CategoryActivity extends AppCompatActivity {
+
+    SQLiteDatabase categorydb=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,9 @@ public class Category extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(Category.this,"you clicked "+ String.valueOf(parent.getItemAtPosition(position)), Toast.LENGTH_SHORT).show();
+                        Intent questionintent = new Intent(CategoryActivity.this,QuestionActivity.class);
+                         questionintent.putExtra("Tablename",String.valueOf(parent.getItemAtPosition(position)));
+                         startActivity(questionintent);
             }
         });
 
