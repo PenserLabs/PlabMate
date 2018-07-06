@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PlabMate</string>
     <string name="question_TV">Question:</string>
+    <string name="splashtext">PLABMATE</string>
+    <string name="Fb_URL">https://www.facebook.com/plabmate/</string>
+    <string name="Youtube_URL">http://www.youtube.com/channel/UCOQEvHbPB0rJ5YTdWjmBFJA</string>
+    <string name="penserlabs_url">https://www.penserlabs.tech</string>
 </resources>

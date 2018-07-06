@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#208ed9</color>
+    <color name="colorPrimaryDark">#208ed9</color>
+    <color name="colorAccent">#3cfe22</color>
     <color name="black">#000000</color>
     <color name="grey">#312f2f</color>
     <color name="white">#ffff</color>
     <color name="radiogroup_bg">#ffff</color>
-    <color name="radiobutton_bg">#b0b0b0</color>
+    <color name="radiobutton_bg">#d3edf6</color>
+    <color name="radiochecked_bg">#8ad5ef</color>
+    <color name="correct_answer">#a5f7c8</color>
+    <color name="wrong_answer">#f79191</color>
+    <color name="question_background">#edeadf </color>
 </resources>

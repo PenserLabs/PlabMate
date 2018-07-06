@@ -7,4 +7,5 @@
     <dimen name="margin_large">10dp</dimen>
     <dimen name="text_large">20sp</dimen>
     <dimen name="radiobutton_height">40dp</dimen>
+    <dimen name="margin_xtralarge">15dp</dimen>
 </resources>

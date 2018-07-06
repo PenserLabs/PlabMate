@@ -12,6 +12,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
     private final GestureDetector gestureDetector;
 
+
     public OnSwipeTouchListener(Context context) {
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
@@ -22,14 +23,15 @@ public class OnSwipeTouchListener implements OnTouchListener {
     public void onSwipeRight() {
     }
 
+
     public boolean onTouch(View v, MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
     }
 
     private final class GestureListener extends SimpleOnGestureListener {
 
-        private static final int SWIPE_DISTANCE_THRESHOLD = 100;
-        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+        private static final int SWIPE_DISTANCE_THRESHOLD = 2;
+        private static final int SWIPE_VELOCITY_THRESHOLD = 5;
 
         @Override
         public boolean onDown(MotionEvent e) {
@@ -49,5 +51,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
             }
             return false;
         }
+
     }
+
 }

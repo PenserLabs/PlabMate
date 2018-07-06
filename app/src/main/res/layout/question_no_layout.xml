@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_large"
+        android:id="@+id/quesnav_CV">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:id="@+id/qnonav_TV"
+            android:hint="qno"
+            android:gravity="center" />
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

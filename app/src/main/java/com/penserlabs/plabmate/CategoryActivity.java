@@ -8,35 +8,47 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class CategoryActivity extends AppCompatActivity {
 
-    SQLiteDatabase categorydb=null;
+    GridView categoryview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        String[] categories= {"Anatomy", "Cardiology", "Dermatology", "Emergency", "Endocrinology", "ENT", "Epidemiology", "Ethics", "Gastroentology", "Genetics", "Hematology", "Infectious Diseases", "Nephrology", "Neurology", "OBG", "Ophthalmology", "Orthopedics", "Paediatrics", "Pharmacology", "Psychiatry", "Respiratory", "Rheumatology", "Surgery", "Urology", "Vascular"};
+        categoryview = findViewById(R.id.category_GV);
 
-        final ListAdapter categoryAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1,categories);
+        final int[] imageid = {R.drawable.anatomy,R.drawable.cardiology,R.drawable.dermatology,R.drawable.emergency,R.drawable.endocrinology,R.drawable.ent,R.drawable.epidemiology,R.drawable.ethics,R.drawable.gastroentology,R.drawable.genetics,R.drawable.hematology,R.drawable.infectious,R.drawable.nephrology,R.drawable.neurology,R.drawable.obg,R.drawable.ophthalmology,R.drawable.orthopedics,R.drawable.paediatrics,R.drawable.pharmacology,R.drawable.psychiatry,R.drawable.respiratory,R.drawable.rheumatology,R.drawable.surgery,R.drawable.urology,R.drawable.vascular};
 
-        ListView categotyListview = findViewById(R.id.Category_LV);
+        final String[] categories= {"Anatomy", "Cardiology", "Dermatology", "Emergency", "Endocrinology", "ENT", "Epidemiology", "Ethics", "Gastroentology", "Genetics", "Hematology", "Infectious Diseases", "Nephrology", "Neurology", "OBG", "Ophthalmology", "Orthopedics", "Paediatrics", "Pharmacology", "Psychiatry", "Respiratory", "Rheumatology", "Surgery", "Urology", "Vascular"};
 
-        categotyListview.setAdapter(categoryAdapter);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this,categories,imageid);
 
-        categotyListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        categoryview.setAdapter(categoryAdapter);
+
+//        categoryview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String string = "this "+ categories[+position];
+//                Toast.makeText(CategoryActivity.this, string,LENGTH_SHORT).show();
+//            }
+//        });
+
+        categoryview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        Intent questionintent = new Intent(CategoryActivity.this,QuestionActivity.class);
-                         questionintent.putExtra("Tablename",String.valueOf(parent.getItemAtPosition(position)));
+                        Intent questionintent = new Intent(CategoryActivity.this,QuestionNav.class);
+                         questionintent.putExtra("Tablename",categories[+position]);
                          startActivity(questionintent);
             }
         });
