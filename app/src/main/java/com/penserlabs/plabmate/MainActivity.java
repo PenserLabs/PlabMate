@@ -81,4 +81,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
         startActivity(intent);
     }
+
+    public void gotoMocktest(View view) {
+        Toast.makeText(MainActivity.this,"Will be available soon",Toast.LENGTH_SHORT).show();
+    }
+
+    public void gotoTerms(View view) {
+        Intent intent = new Intent(MainActivity.this,TermsActivity.class);
+        startActivity(intent);
+    }
 }

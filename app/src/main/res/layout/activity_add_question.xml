@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddQuestionActivity"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Question"
+        android:textColorHint="@color/white"
+        android:minLines="5"
+        android:textColor="@color/white"
+        android:id="@+id/addquestion_ET"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Options (Separated by commas)"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:minLines="2"
+        android:id="@+id/addoptions_ET"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:hint="Answer key"
+        android:minLines="2"
+        android:id="@+id/addkey_ET"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:hint="Explanation"
+        android:minLines="3"
+        android:id="@+id/addexplanation_ET"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_send_black_24dp"
+        android:id="@+id/reportques_IV"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/margin_xtralarge"
+        android:onClick="SubmitQuestion"
+        />
+
+</LinearLayout>

@@ -5,4 +5,26 @@
     <string name="Fb_URL">https://www.facebook.com/plabmate/</string>
     <string name="Youtube_URL">http://www.youtube.com/channel/UCOQEvHbPB0rJ5YTdWjmBFJA</string>
     <string name="penserlabs_url">https://www.penserlabs.tech</string>
+    <string name="report">**Report this question</string>
+    <string name="add_question_TV">Add Question</string>
+
+    <string name="check_license">Check license</string>
+    <string name="checking_license">Checking license...</string>
+    <string name="dont_allow">Unauthorized Access</string>
+    <string name="allow">Allow the user access</string>
+    <string name="application_error">Application error: %1$s</string>
+
+    <!-- Unlicensed dialog messages -->
+    <string name="unlicensed_dialog_title">Application not licensed</string>
+    <string name="unlicensed_dialog_body">This application is not licensed. Please purchase it from Android Market.</string>
+    <string name="unlicensed_dialog_retry_body">Unable to validate license. Check to see if a network connection is available.</string>
+    <string name="buy_button">Buy app</string>
+    <string name="retry_button">Retry</string>
+    <string name="quit_button">Exit</string>
+    <string name="Toast_addques_emailsent">Thankyou.Yout question will be verified by our team</string>
+    <string name="Toast_completefields">Please complete all the fields</string>
+    <string name="Toast_comment_not_found">Please tell us what is wrong</string>
+    <string name="Toast_Report_sent">Thankyou.Our team will verify your request</string>
+    <string name="Terms_TV">*Terms of Service</string>
+    <string name="terms_URL">http://www.penserlabs.tech/plabmate/terms.html</string>
 </resources>

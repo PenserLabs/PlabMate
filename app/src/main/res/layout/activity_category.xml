@@ -9,7 +9,7 @@
     android:background="@drawable/background">
 
         <GridView
-            android:numColumns="2"
+            android:numColumns="1"
             android:gravity="center"
             android:stretchMode="columnWidth"
             android:layout_width="fill_parent"
@@ -17,6 +17,7 @@
             android:id="@+id/category_GV"
             android:textAlignment="center"
 
+            android:scrollbars="none"
             />
 
 

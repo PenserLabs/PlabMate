@@ -5,16 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuestionNav"
-    android:layout_margin="@dimen/margin_large">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
     <GridView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:numColumns="auto_fit"
         android:columnWidth="60dp"
         android:stretchMode="columnWidth"
-        android:id="@+id/quesnav_GV">
-
+        android:id="@+id/quesnav_GV"
+        android:layout_margin="@dimen/margin_large">
     </GridView>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:onClick="Addquestion"
+            android:background="@drawable/round_transparent_corner"
+            android:backgroundTint="@color/white"
+            android:text="@string/add_question_TV"
+            android:paddingStart="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_small"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </LinearLayout>

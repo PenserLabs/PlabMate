@@ -3,19 +3,19 @@ package com.penserlabs.plabmate;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.os.Handler;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -23,7 +23,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.penserlabs.plabmate.R.color.question_background;
+import com.nostra13.universalimageloader.utils.L;
+
 import static com.penserlabs.plabmate.R.color.radiobutton_bg;
 import static com.penserlabs.plabmate.R.color.radiochecked_bg;
 import static com.penserlabs.plabmate.R.color.white;
@@ -36,22 +37,26 @@ public class QuestionActivity extends AppCompatActivity {
     int qno;
     RadioGroup optionsgroup;
     RadioButton opt_a,opt_b,opt_c,opt_d,opt_e;
-    TextView question,quesno,remark,explanation;
+    TextView question,quesno,remark,explanation,reportTV;
     Cursor cursor;
     DataBaseHelper myDbHelper;
     CardView questionview,optionsview;
-    LinearLayout questionlayout;
+    LinearLayout questionlayout,reportlayout;
     FloatingActionButton submit;
     String answer = "";
     ImageView remarkiv;
-    Handler handler = new Handler();
+    View view;
+    Button previousbt;
+    EditText reportcomment;
+
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-
+        view= new View(QuestionActivity.this);
         question= (TextView) findViewById(R.id.question_TV);
         quesno =(TextView) findViewById(R.id.qno_TV);
         questionview = (CardView) findViewById(R.id.questioncard);
@@ -67,7 +72,10 @@ public class QuestionActivity extends AppCompatActivity {
         opt_e = (RadioButton)findViewById(R.id.optionE_RB);
         submit = (FloatingActionButton) findViewById(R.id.submit_FAB);
         remarkiv = findViewById(R.id.remark_IV);
-
+        previousbt = findViewById(R.id.prevquestion_BT);
+        reportlayout = findViewById(R.id.reportques_LL);
+        reportTV = findViewById(R.id.reportques_TV);
+        reportcomment = findViewById(R.id.reportques_ET);
 
         Bundle extras = getIntent().getExtras();
         qno = extras.getInt("Qno");
@@ -112,25 +120,14 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onSwipeLeft() {
 
-                cursor.moveToNext();
-
-                if (cursor!=null && cursor.getPosition()<cursor.getCount()){
-
-                    setquestion();
-
-                }else {
-                    Toast.makeText(QuestionActivity.this,"You have reached the last question",Toast.LENGTH_SHORT).show();
-                    cursor.moveToPrevious();
-                }
+               NextQuestion(view);
 
             }
             @Override
             public void onSwipeRight() {
-                cursor.moveToPrevious();
-                if (cursor!=null && cursor.getPosition()>=0){
-                    setquestion();
 
-                }
+                PreviousQuestion(view);
+
             }
         });
 
@@ -138,24 +135,14 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onSwipeLeft() {
 
-                cursor.moveToNext();
-                if (cursor!=null && cursor.getPosition()<cursor.getCount()){
-
-                    setquestion();
-
-                }else {
-                    Toast.makeText(QuestionActivity.this,"You have reached the last question",Toast.LENGTH_SHORT).show();
-                    cursor.moveToPrevious();
-                }
+                NextQuestion(view);
 
             }
             @Override
             public void onSwipeRight() {
-                cursor.moveToPrevious();
-                if (cursor!=null && cursor.getPosition()>=0){
-                    setquestion();
 
-                }
+                PreviousQuestion(view);
+
             }
         });
     }
@@ -163,6 +150,14 @@ public class QuestionActivity extends AppCompatActivity {
     private void setquestion() {
 
             ResetView();
+            if (cursor.getPosition()== 0){
+                previousbt.setVisibility(View.INVISIBLE);
+            }else{
+                previousbt.setVisibility(View.VISIBLE);
+            }
+
+
+
             quesno.setText(String.valueOf(cursor.getPosition()+1)+"/"+String.valueOf(cursor.getCount()));
             String questioncoloumn = cursor.getString(cursor.getColumnIndex("Question"));
             String optA = cursor.getString(cursor.getColumnIndex("Opt_A"));
@@ -179,9 +174,16 @@ public class QuestionActivity extends AppCompatActivity {
             opt_e.setText(optE);
 
         if (cursor.getInt(cursor.getColumnIndex("Flag"))!=0){
-           CheckedView();
+            CheckedView();
 
+        }else {
+            opt_a.setClickable(true);
+            opt_b.setClickable(true);
+            opt_c.setClickable(true);
+            opt_d.setClickable(true);
+            opt_e.setClickable(true);
         }
+
     }
 
     private void checkanswer(){
@@ -249,7 +251,8 @@ public class QuestionActivity extends AppCompatActivity {
         opt_c.setBackgroundColor(getResources().getColor(radiobutton_bg));
         opt_d.setBackgroundColor(getResources().getColor(radiobutton_bg));
         opt_e.setBackgroundColor(getResources().getColor(radiobutton_bg));
-
+        reportTV.setVisibility(View.GONE);
+        reportlayout.setVisibility(View.GONE);
     }
 
     public void CheckedView(){
@@ -265,10 +268,85 @@ public class QuestionActivity extends AppCompatActivity {
         opt_c.setClickable(false);
         opt_d.setClickable(false);
         opt_e.setClickable(false);
-
+        reportTV.setVisibility(View.VISIBLE);
     }
 
     public void SubmitAnswer(View view) {
         checkanswer();
     }
+
+    public void NextQuestion(View view) {
+
+        cursor.moveToNext();
+        if (cursor!=null && cursor.getPosition()<cursor.getCount()){
+
+            setquestion();
+
+        }else {
+            Toast.makeText(QuestionActivity.this,"You have reached the last question",Toast.LENGTH_SHORT).show();
+            cursor.moveToPrevious();
+        }
+
+    }
+
+    public void PreviousQuestion(View view) {
+
+        cursor.moveToPrevious();
+        if (cursor!=null && cursor.getPosition()>=0){
+            setquestion();
+
+        }
+
+    }
+
+    public void ReportQuestion(View view) {
+        reportlayout.setVisibility(View.VISIBLE);
+    }
+
+    public void SubmitReport(View view) {
+
+        if(!String.valueOf(reportcomment.getText()).isEmpty() ) {
+            try
+
+            {
+                SendEmailAsyncTask l = new SendEmailAsyncTask();
+                l.execute();  //sends the email in background
+                Toast.makeText(QuestionActivity.this, R.string.Toast_Report_sent,Toast.LENGTH_LONG).show();
+
+            } catch (Exception e) {
+                Log.e("SendMail", e.getMessage(), e);
+            }
+        }else {
+            Toast.makeText(QuestionActivity.this, R.string.Toast_comment_not_found,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+        class SendEmailAsyncTask extends AsyncTask {
+
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    GMailSender sender = new GMailSender("mockplabmate@gmail.com", "plabuk123");
+
+                    String report= "Tablename:"+tablename+"\n"+"Qno:"+cursor.getInt(cursor.getColumnIndex("_id"))+"\n"+"Comments:"+reportcomment.getText();
+
+
+                    sender.sendMail("Report",
+                            report,"mockplabmate@gmail.com",
+                            "developer.penserlabs@gmail.com");
+
+
+                } catch (Exception e) {
+
+                    Log.e("error", e.getMessage(), e);
+
+                    return "Email Not Sent";
+
+                }
+                return "Email Sent";
+
+            }
+        }
+
 }

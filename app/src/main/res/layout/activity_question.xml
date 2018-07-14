@@ -10,7 +10,11 @@
     android:id="@+id/questionlayout">
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -156,23 +160,112 @@
     </LinearLayout>
 
     </android.support.v7.widget.CardView>
-
-</ScrollView>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="@dimen/margin_medium">
+        android:layout_margin="@dimen/margin_medium"
+        >
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentBottom="true"
-           android:layout_centerHorizontal="true"
-           android:hint="qno"
-           android:id="@+id/qno_TV"
-           android:layout_margin="@dimen/text_small"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_margin="@dimen/margin_large"
+            android:id="@+id/buttonlayout_LL">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp">
+
+                <Button
+                    android:id="@+id/prevquestion_BT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Previous"
+                    android:background="@drawable/round_transparent_corner"
+                    android:onClick="PreviousQuestion"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NEXT"
+                    android:id="@+id/nextquestion_BT"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/round_transparent_corner"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:onClick="NextQuestion"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report"
+            android:layout_below="@+id/buttonlayout_LL"
+            android:id="@+id/reportques_TV"
+            android:textAlignment="center"
+            android:textColor="#f9651417"
+            android:onClick="ReportQuestion"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true"
+            android:paddingStart="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_small"
+            android:background="@drawable/round_transparent_corner"
+            android:backgroundTint="@color/white"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/reportques_LL"
+            android:layout_below="@+id/reportques_TV"
+            android:weightSum="2"
+            android:visibility="gone">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/reportques_ET"
+                android:textCursorDrawable="@color/black"
+                android:paddingStart="@dimen/margin_small"
+                android:layout_margin="@dimen/margin_small"
+                android:hint="Add comments"
+                android:textColorHint="@color/white"
+                android:layout_weight="2"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_send_black_24dp"
+                android:layout_weight=".5"
+                android:id="@+id/reportques_IV"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_small"
+                android:onClick="SubmitReport"
+                />
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:hint="qno"
+            android:id="@+id/qno_TV"
+            android:layout_margin="@dimen/text_small"
+            android:layout_below="@+id/reportques_LL"/>
     </RelativeLayout>
+</LinearLayout>
+</ScrollView>
+
+
 
 </LinearLayout>

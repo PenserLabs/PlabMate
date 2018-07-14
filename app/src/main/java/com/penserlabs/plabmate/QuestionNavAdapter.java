@@ -68,14 +68,14 @@ public class QuestionNavAdapter extends BaseAdapter {
 
 
         if (flag[position] == 1) {
-            cardView.setBackgroundColor(mContext.getResources().getColor(R.color.correct_answer));
+            textView.setBackgroundColor(mContext.getResources().getColor(R.color.correct_answer));
 
         }
         else if (flag[position] == 2) {
-            cardView.setBackgroundColor(mContext.getResources().getColor(R.color.wrong_answer));
+            textView.setBackgroundColor(mContext.getResources().getColor(R.color.wrong_answer));
         }
         else if(flag[position] == 0){
-            cardView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+            textView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
 
 
         }

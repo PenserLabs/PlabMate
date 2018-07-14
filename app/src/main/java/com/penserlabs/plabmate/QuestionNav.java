@@ -25,7 +25,7 @@ public class QuestionNav extends AppCompatActivity {
     String tablename;
     Cursor cursor;
     DataBaseHelper myDbHelper;
-    CardView qnonav;
+    TextView qnonav;
     LinearLayout questionlayout;
     GridView qnonavview;
 
@@ -35,7 +35,7 @@ public class QuestionNav extends AppCompatActivity {
         setContentView(R.layout.activity_question_nav);
 
         qnonavview = findViewById(R.id.quesnav_GV);
-        qnonav = findViewById(R.id.quesnav_CV);
+        qnonav = findViewById(R.id.qnonav_TV);
 
         Bundle extras = getIntent().getExtras();
         tablename = extras.getString("Tablename");
@@ -85,5 +85,11 @@ public class QuestionNav extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void Addquestion(View view) {
+        Intent addques = new Intent(QuestionNav.this,AddQuestionActivity.class);
+        addques.putExtra("Tablename",tablename);
+        startActivity(addques);
     }
 }
